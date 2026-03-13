@@ -1,14 +1,14 @@
 {
     "name": "workflow-plugin-okta",
     "version": "0.1.0",
-    "description": "Okta identity platform plugin (~130 step types across all Okta APIs)",
+    "description": "Okta identity and access management plugin",
     "author": "GoCodeAlone",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "type": "external",
     "tier": "community",
     "private": false,
     "minEngineVersion": "0.3.30",
-    "keywords": ["okta", "identity", "sso", "mfa", "users", "groups", "apps", "iam"],
+    "keywords": ["okta", "identity", "iam", "sso", "mfa"],
     "homepage": "https://github.com/GoCodeAlone/workflow-plugin-okta",
     "repository": "https://github.com/GoCodeAlone/workflow-plugin-okta",
     "capabilities": {
