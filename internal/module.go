@@ -3,10 +3,11 @@ package internal
 import (
 	"context"
 	"fmt"
-	"net/http"
+
+	oktaprovider "github.com/GoCodeAlone/workflow-plugin-okta/okta"
 )
 
-// oktaModule creates an Okta REST client and registers it.
+// oktaModule creates an Okta SDK client and registers it.
 type oktaModule struct {
 	name   string
 	config map[string]any
@@ -16,7 +17,7 @@ func newOktaModule(name string, config map[string]any) (*oktaModule, error) {
 	return &oktaModule{name: name, config: config}, nil
 }
 
-// Init creates the Okta client and registers it in the global registry.
+// Init creates the Okta SDK client via the provider and registers it.
 func (m *oktaModule) Init() error {
 	orgURL, _ := m.config["orgUrl"].(string)
 	if orgURL == "" {
@@ -31,15 +32,26 @@ func (m *oktaModule) Init() error {
 		return fmt.Errorf("okta.provider %q: either apiToken or clientId+privateKey are required", m.name)
 	}
 
-	httpClient := &http.Client{}
-
-	client := &OktaClient{
-		HTTPClient: httpClient,
+	cfg := oktaprovider.Config{
 		OrgURL:     orgURL,
 		APIToken:   apiToken,
+		ClientID:   clientID,
+		PrivateKey: privateKey,
+	}
+	if apiToken == "" {
+		cfg.AuthMode = "private_key"
 	}
 
-	RegisterClient(m.name, client)
+	provider, err := oktaprovider.NewProvider(cfg)
+	if err != nil {
+		return fmt.Errorf("okta.provider %q: %w", m.name, err)
+	}
+
+	RegisterClient(m.name, &OktaClient{
+		SdkClient: provider.Client,
+		OrgURL:    orgURL,
+		APIToken:  apiToken,
+	})
 	return nil
 }
 

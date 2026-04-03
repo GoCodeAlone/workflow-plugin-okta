@@ -1,15 +1,16 @@
 package internal
 
 import (
-	"net/http"
 	"sync"
+
+	oktasdk "github.com/okta/okta-sdk-golang/v6/okta"
 )
 
-// OktaClient holds an HTTP client and base URL for calling the Okta REST API.
+// OktaClient wraps the official Okta SDK APIClient for REST API access.
 type OktaClient struct {
-	HTTPClient *http.Client
-	OrgURL     string
-	APIToken   string
+	SdkClient *oktasdk.APIClient
+	OrgURL    string
+	APIToken  string
 }
 
 var (

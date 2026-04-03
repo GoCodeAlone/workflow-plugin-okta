@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strconv"
+	"time"
 )
 
 func getModuleName(config map[string]any) string {
@@ -93,61 +95,98 @@ func toInt64(v any) int64 {
 	return 0
 }
 
+// getHTTPClient returns the SDK-managed HTTP client, falling back to
+// http.DefaultClient when no SDK client is configured (e.g. unit tests).
+func getHTTPClient(client *OktaClient) *http.Client {
+	if client.SdkClient != nil {
+		return client.SdkClient.GetConfig().HTTPClient
+	}
+	return http.DefaultClient
+}
+
+// rateLimitWait parses Okta's X-Rate-Limit-Reset header (unix timestamp)
+// to determine how long to wait before retrying a 429 response.
+func rateLimitWait(resp *http.Response) time.Duration {
+	if reset := resp.Header.Get("X-Rate-Limit-Reset"); reset != "" {
+		if ts, err := strconv.ParseInt(reset, 10, 64); err == nil {
+			wait := time.Until(time.Unix(ts, 0))
+			if wait > 0 && wait < 60*time.Second {
+				return wait + time.Second
+			}
+		}
+	}
+	return 2 * time.Second
+}
+
 // oktaRequest performs an authenticated HTTP request to the Okta API.
-// method: GET, POST, PUT, DELETE
-// path: e.g. "/api/v1/users"
-// body: request body for POST/PUT (nil for GET/DELETE)
-// Returns the response body as a parsed JSON value (map or slice).
+// Uses the SDK's HTTP client for transport and adds automatic rate-limit retry.
 func oktaRequest(client *OktaClient, method, path string, body map[string]any, queryParams url.Values) (any, int, error) {
 	endpoint := client.OrgURL + path
 	if len(queryParams) > 0 {
 		endpoint += "?" + queryParams.Encode()
 	}
 
-	var reqBody io.Reader
+	var bodyBytes []byte
 	if body != nil {
-		data, err := json.Marshal(body)
+		var err error
+		bodyBytes, err = json.Marshal(body)
 		if err != nil {
 			return nil, 0, fmt.Errorf("okta: failed to marshal request body: %w", err)
 		}
-		reqBody = bytes.NewReader(data)
 	}
 
-	req, err := http.NewRequest(method, endpoint, reqBody)
-	if err != nil {
-		return nil, 0, fmt.Errorf("okta: failed to create request: %w", err)
+	httpClient := getHTTPClient(client)
+	const maxRetries = 3
+
+	for attempt := 0; attempt <= maxRetries; attempt++ {
+		var reqBody io.Reader
+		if bodyBytes != nil {
+			reqBody = bytes.NewReader(bodyBytes)
+		}
+
+		req, err := http.NewRequest(method, endpoint, reqBody)
+		if err != nil {
+			return nil, 0, fmt.Errorf("okta: failed to create request: %w", err)
+		}
+
+		req.Header.Set("Accept", "application/json")
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Authorization", "SSWS "+client.APIToken)
+
+		resp, err := httpClient.Do(req)
+		if err != nil {
+			return nil, 0, fmt.Errorf("okta: request failed: %w", err)
+		}
+
+		if resp.StatusCode == http.StatusTooManyRequests && attempt < maxRetries {
+			resp.Body.Close()
+			time.Sleep(rateLimitWait(resp))
+			continue
+		}
+
+		respData, err := io.ReadAll(resp.Body)
+		resp.Body.Close()
+		if err != nil {
+			return nil, resp.StatusCode, fmt.Errorf("okta: failed to read response: %w", err)
+		}
+
+		if resp.StatusCode >= 400 {
+			return nil, resp.StatusCode, fmt.Errorf("okta: API error %d: %s", resp.StatusCode, string(respData))
+		}
+
+		if len(respData) == 0 || string(respData) == "null" {
+			return nil, resp.StatusCode, nil
+		}
+
+		var result any
+		if err := json.Unmarshal(respData, &result); err != nil {
+			return nil, resp.StatusCode, fmt.Errorf("okta: failed to parse response: %w", err)
+		}
+
+		return result, resp.StatusCode, nil
 	}
 
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "SSWS "+client.APIToken)
-
-	resp, err := client.HTTPClient.Do(req)
-	if err != nil {
-		return nil, 0, fmt.Errorf("okta: request failed: %w", err)
-	}
-	defer resp.Body.Close()
-
-	respData, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, resp.StatusCode, fmt.Errorf("okta: failed to read response: %w", err)
-	}
-
-	if resp.StatusCode >= 400 {
-		return nil, resp.StatusCode, fmt.Errorf("okta: API error %d: %s", resp.StatusCode, string(respData))
-	}
-
-	if len(respData) == 0 || string(respData) == "null" {
-		return nil, resp.StatusCode, nil
-	}
-
-	// Try to parse as object first, then array
-	var result any
-	if err := json.Unmarshal(respData, &result); err != nil {
-		return nil, resp.StatusCode, fmt.Errorf("okta: failed to parse response: %w", err)
-	}
-
-	return result, resp.StatusCode, nil
+	return nil, http.StatusTooManyRequests, fmt.Errorf("okta: rate limited after %d retries", maxRetries)
 }
 
 // oktaGet performs a GET request to the Okta API.
@@ -211,7 +250,7 @@ func mapResult(m map[string]any) map[string]any {
 // listResult wraps a slice result in a StepResult output with items + count.
 func listResult(key string, items []any) map[string]any {
 	return map[string]any{
-		key:   items,
+		key:     items,
 		"count": len(items),
 	}
 }
