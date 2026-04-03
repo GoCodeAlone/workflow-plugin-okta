@@ -38,20 +38,25 @@ func (m *oktaModule) Init() error {
 		ClientID:   clientID,
 		PrivateKey: privateKey,
 	}
+
+	authMode := "token"
 	if apiToken == "" {
-		cfg.AuthMode = "private_key"
+		authMode = "private_key"
+		cfg.AuthMode = authMode
 	}
+
+	scopes := resolveStringSlice("scopes", m.config, nil)
+	if authMode == "private_key" && len(scopes) == 0 {
+		scopes = []string{"okta.users.manage", "okta.groups.manage", "okta.apps.manage"}
+	}
+	cfg.Scopes = scopes
 
 	provider, err := oktaprovider.NewProvider(cfg)
 	if err != nil {
 		return fmt.Errorf("okta.provider %q: %w", m.name, err)
 	}
 
-	RegisterClient(m.name, &OktaClient{
-		SdkClient: provider.Client,
-		OrgURL:    orgURL,
-		APIToken:  apiToken,
-	})
+	RegisterClient(m.name, NewOktaClient(provider.Client, orgURL, apiToken, authMode))
 	return nil
 }
 

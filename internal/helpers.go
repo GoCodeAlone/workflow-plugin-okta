@@ -9,6 +9,8 @@ import (
 	"net/url"
 	"strconv"
 	"time"
+
+	oktasdk "github.com/okta/okta-sdk-golang/v6/okta"
 )
 
 func getModuleName(config map[string]any) string {
@@ -118,6 +120,33 @@ func rateLimitWait(resp *http.Response) time.Duration {
 	return 2 * time.Second
 }
 
+// setAuthHeader sets the appropriate Authorization header based on auth mode.
+// For SSWS (token) mode it sets the SSWS header directly.
+// For PrivateKey mode it delegates to the SDK's PrivateKeyAuth which handles
+// JWT assertion, token exchange, and Bearer token caching.
+func setAuthHeader(client *OktaClient, req *http.Request, method, endpoint string) error {
+	if client.AuthMode == "private_key" && client.SdkClient != nil {
+		cfg := client.SdkClient.GetConfig()
+		auth := oktasdk.NewPrivateKeyAuth(oktasdk.PrivateKeyAuthConfig{
+			TokenCache:       client.tokenCache,
+			HttpClient:       cfg.HTTPClient,
+			PrivateKeySigner: cfg.PrivateKeySigner,
+			PrivateKey:       cfg.Okta.Client.PrivateKey,
+			PrivateKeyId:     cfg.Okta.Client.PrivateKeyId,
+			ClientId:         cfg.Okta.Client.ClientId,
+			OrgURL:           cfg.Okta.Client.OrgUrl,
+			UserAgent:        oktasdk.NewUserAgent(cfg).String(),
+			Scopes:           cfg.Okta.Client.Scopes,
+			MaxRetries:       cfg.Okta.Client.RateLimit.MaxRetries,
+			MaxBackoff:       cfg.Okta.Client.RateLimit.MaxBackoff,
+			Req:              req,
+		})
+		return auth.Authorize(method, endpoint)
+	}
+	req.Header.Set("Authorization", "SSWS "+client.APIToken)
+	return nil
+}
+
 // oktaRequest performs an authenticated HTTP request to the Okta API.
 // Uses the SDK's HTTP client for transport and adds automatic rate-limit retry.
 func oktaRequest(client *OktaClient, method, path string, body map[string]any, queryParams url.Values) (any, int, error) {
@@ -151,7 +180,10 @@ func oktaRequest(client *OktaClient, method, path string, body map[string]any, q
 
 		req.Header.Set("Accept", "application/json")
 		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("Authorization", "SSWS "+client.APIToken)
+
+		if err := setAuthHeader(client, req, method, endpoint); err != nil {
+			return nil, 0, fmt.Errorf("okta: failed to authorize request: %w", err)
+		}
 
 		resp, err := httpClient.Do(req)
 		if err != nil {

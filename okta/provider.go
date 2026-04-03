@@ -20,6 +20,7 @@ type Config struct {
 	ClientID   string
 	PrivateKey string
 	AuthMode   string // "token" (default) or "private_key"
+	Scopes     []string
 }
 
 // NewProvider creates a Provider backed by the official Okta Go SDK v6.
@@ -34,6 +35,7 @@ func NewProvider(cfg Config) (*Provider, error) {
 			oktasdk.WithClientId(cfg.ClientID),
 			oktasdk.WithPrivateKey(cfg.PrivateKey),
 			oktasdk.WithAuthorizationMode("PrivateKey"),
+			oktasdk.WithScopes(cfg.Scopes),
 		)
 	} else if cfg.APIToken != "" {
 		opts = append(opts, oktasdk.WithToken(cfg.APIToken))
