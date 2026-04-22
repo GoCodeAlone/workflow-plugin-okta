@@ -7,6 +7,10 @@ import (
 	sdk "github.com/GoCodeAlone/workflow/plugin/external/sdk"
 )
 
+// Version is set at build time via -ldflags
+// "-X github.com/GoCodeAlone/workflow-plugin-okta/internal.Version=X.Y.Z"
+var Version = "dev"
+
 // oktaPlugin implements sdk.PluginProvider, sdk.ModuleProvider, and sdk.StepProvider.
 type oktaPlugin struct{}
 
@@ -19,7 +23,7 @@ func NewOktaPlugin() sdk.PluginProvider {
 func (p *oktaPlugin) Manifest() sdk.PluginManifest {
 	return sdk.PluginManifest{
 		Name:        "workflow-plugin-okta",
-		Version:     "0.1.0",
+		Version:     Version,
 		Author:      "GoCodeAlone",
 		Description: "Okta identity platform plugin (~130 step types across all Okta APIs)",
 	}
