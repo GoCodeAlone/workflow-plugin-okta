@@ -14,3 +14,17 @@ jobs:
           go-version-file: go.mod
       - run: go build ./...
       - run: go test ./... -v -race -count=1
+
+  wfctl-strict-contracts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Fail fast if plugin.json is missing
+        run: test -f plugin.json || (echo "plugin.json not found" && exit 1)
+      - name: Validate plugin manifest
+        run: go run github.com/GoCodeAlone/workflow/cmd/wfctl@v0.3.56 plugin validate --file plugin.json
