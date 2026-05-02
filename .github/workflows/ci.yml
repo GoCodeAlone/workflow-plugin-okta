@@ -35,4 +35,6 @@ jobs:
           mkdir -p "${PWD}/bin"
           GOBIN="${PWD}/bin" go install github.com/GoCodeAlone/workflow/cmd/wfctl@v0.20.5
       - name: Validate plugin manifest and strict contracts
-        run: ./bin/wfctl plugin validate --file plugin.json --strict-contracts
+        run: |
+          ./bin/wfctl plugin validate -h 2>&1 | grep -q -- strict-contracts
+          ./bin/wfctl plugin validate --file plugin.json --strict-contracts

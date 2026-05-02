@@ -45,6 +45,7 @@ check-contracts: generate-contracts
 	git diff --exit-code -- plugin.contracts.json
 
 validate-contracts: $(WFCTL)
+	$(WFCTL) plugin validate -h 2>&1 | grep -q -- strict-contracts
 	$(WFCTL) plugin validate --file plugin.json --strict-contracts
 
 clean:
