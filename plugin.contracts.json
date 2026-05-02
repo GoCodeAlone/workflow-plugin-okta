@@ -1,1757 +1,1059 @@
 {
-  "schema_version": "1.0",
-  "plugin": "workflow-plugin-okta",
-  "modules": {
-    "okta.provider": {
-      "config": {
-        "required": {
-          "orgUrl": {
-            "type": "string",
-            "description": "Okta organization URL (e.g. https://your-org.okta.com)"
-          }
-        },
-        "optional": {
-          "apiToken": {
-            "type": "string",
-            "description": "Okta API token for SSWS (token-based) authentication. Required when clientId+privateKey are not provided. Mutually exclusive with clientId+privateKey."
-          },
-          "clientId": {
-            "type": "string",
-            "description": "OAuth 2.0 client ID for private-key (OAuth) authentication. Required together with privateKey when apiToken is not provided."
-          },
-          "privateKey": {
-            "type": "string",
-            "description": "PEM-encoded RSA private key for private-key (OAuth) authentication. Required together with clientId when apiToken is not provided."
-          },
-          "scopes": {
-            "type": "slice",
-            "description": "OAuth 2.0 scopes; defaults to okta.users.manage, okta.groups.manage, okta.apps.manage when using private-key auth"
-          }
-        },
-        "constraints": "Credentials are conditionally required: either apiToken OR (clientId AND privateKey) must be provided at runtime."
-      }
+  "version": "1",
+  "contracts": [
+    {
+      "kind": "module",
+      "type": "okta.provider",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.ProviderConfig"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_reactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_suspend",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_unsuspend",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_unlock",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_reset_factors",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_change_password",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_reset_password",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_expire_password",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_set_recovery_question",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_add_user",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_remove_user",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_list_users",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_assign",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_unassign",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_assign",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_unassign",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_claim_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_claim_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_claim_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_scope_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_scope_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_scope_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_rule_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_rule_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_rule_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_key_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_key_rotate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_enroll",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_verify",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_unenroll",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_session_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_session_refresh",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_session_revoke",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_log_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_verify",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_execute",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_verify",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_brand_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_brand_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_brand_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_theme_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_theme_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_theme_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_org_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_org_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
     }
-  },
-  "steps": {
-    "step.okta_user_create": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name (defaults to 'okta')"},
-        "profile": {"type": "map", "description": "Full Okta user profile object; when provided, firstName/lastName/email/login are ignored"},
-        "firstName": {"type": "string", "description": "User first name (used when profile map is absent)"},
-        "lastName": {"type": "string", "description": "User last name"},
-        "email": {"type": "string", "description": "User email address (required when profile is absent)"},
-        "login": {"type": "string", "description": "User login; defaults to email when absent"},
-        "credentials": {"type": "map", "description": "Okta credentials object (password, recovery question, etc.)"},
-        "activate": {"type": "bool", "description": "Activate the user immediately after creation"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Okta user ID"},
-        "status": {"type": "string", "description": "User status"},
-        "profile": {"type": "map", "description": "User profile object"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_get": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Okta user ID"},
-        "status": {"type": "string", "description": "User status"},
-        "profile": {"type": "map", "description": "User profile object"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "q": {"type": "string", "description": "Search query string"},
-        "filter": {"type": "string", "description": "SCIM filter expression"},
-        "limit": {"type": "int", "description": "Maximum number of results"},
-        "after": {"type": "string", "description": "Cursor for pagination"}
-      },
-      "outputs": {
-        "users": {"type": "slice", "description": "List of user objects"},
-        "count": {"type": "int", "description": "Number of users returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_update": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "profile": {"type": "map", "description": "Profile fields to update"},
-        "credentials": {"type": "map", "description": "Credentials to update"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Okta user ID"},
-        "status": {"type": "string", "description": "User status"},
-        "profile": {"type": "map", "description": "Updated user profile"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_delete": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_activate": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "sendEmail": {"type": "bool", "description": "Send an activation email to the user"}
-      },
-      "outputs": {
-        "activationUrl": {"type": "string", "description": "Activation URL (when sendEmail is false)"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_deactivate": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_reactivate": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "activationUrl": {"type": "string", "description": "Activation URL"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_suspend": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_unsuspend": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_unlock": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_reset_factors": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_change_password": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"},
-        "newPassword": {"type": "string", "description": "New password value"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "oldPassword": {"type": "string", "description": "Current password (required for self-service change)"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_reset_password": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "sendEmail": {"type": "bool", "description": "Send a reset password email"}
-      },
-      "outputs": {
-        "resetPasswordUrl": {"type": "string", "description": "Password reset URL (when sendEmail is false)"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_expire_password": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_user_set_recovery_question": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID or login"},
-        "question": {"type": "string", "description": "Security question text"},
-        "answer": {"type": "string", "description": "Security question answer"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_create": {
-      "required_inputs": {
-        "name": {"type": "string", "description": "Group name"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "description": {"type": "string", "description": "Group description"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Okta group ID"},
-        "profile": {"type": "map", "description": "Group profile object"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_get": {
-      "required_inputs": {
-        "groupId": {"type": "string", "description": "Okta group ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Okta group ID"},
-        "profile": {"type": "map", "description": "Group profile object"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "q": {"type": "string", "description": "Search query string"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "groups": {"type": "slice", "description": "List of group objects"},
-        "count": {"type": "int", "description": "Number of groups returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_delete": {
-      "required_inputs": {
-        "groupId": {"type": "string", "description": "Okta group ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_add_user": {
-      "required_inputs": {
-        "groupId": {"type": "string", "description": "Okta group ID"},
-        "userId": {"type": "string", "description": "Okta user ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_remove_user": {
-      "required_inputs": {
-        "groupId": {"type": "string", "description": "Okta group ID"},
-        "userId": {"type": "string", "description": "Okta user ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_list_users": {
-      "required_inputs": {
-        "groupId": {"type": "string", "description": "Okta group ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "users": {"type": "slice", "description": "List of user objects"},
-        "count": {"type": "int", "description": "Number of users returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_rule_create": {
-      "required_inputs": {
-        "name": {"type": "string", "description": "Group rule name"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "conditions": {"type": "map", "description": "Rule conditions object"},
-        "actions": {"type": "map", "description": "Rule actions object"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Group rule ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_rule_get": {
-      "required_inputs": {
-        "ruleId": {"type": "string", "description": "Group rule ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Group rule ID"},
-        "name": {"type": "string", "description": "Group rule name"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_rule_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "rules": {"type": "slice", "description": "List of group rule objects"},
-        "count": {"type": "int", "description": "Number of rules returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_rule_delete": {
-      "required_inputs": {
-        "ruleId": {"type": "string", "description": "Group rule ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_rule_activate": {
-      "required_inputs": {
-        "ruleId": {"type": "string", "description": "Group rule ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_group_rule_deactivate": {
-      "required_inputs": {
-        "ruleId": {"type": "string", "description": "Group rule ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_create": {
-      "required_inputs": {
-        "label": {"type": "string", "description": "Application label"},
-        "signOnMode": {"type": "string", "description": "Sign-on mode (e.g. SAML_2_0, OIDC, BOOKMARK)"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "name": {"type": "string", "description": "Application name (slug)"},
-        "settings": {"type": "map", "description": "Application settings object"},
-        "visibility": {"type": "map", "description": "Application visibility settings"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Application ID"},
-        "label": {"type": "string", "description": "Application label"},
-        "status": {"type": "string", "description": "Application status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_get": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Application ID"},
-        "label": {"type": "string", "description": "Application label"},
-        "status": {"type": "string", "description": "Application status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "q": {"type": "string", "description": "Search query string"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "apps": {"type": "slice", "description": "List of application objects"},
-        "count": {"type": "int", "description": "Number of applications returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_update": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "label": {"type": "string", "description": "Updated application label"},
-        "settings": {"type": "map", "description": "Updated application settings"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Application ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_delete": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_activate": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_deactivate": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_user_assign": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"},
-        "userId": {"type": "string", "description": "Okta user ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "profile": {"type": "map", "description": "App user profile"},
-        "scope": {"type": "string", "description": "Assignment scope"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "App user assignment ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_user_get": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"},
-        "userId": {"type": "string", "description": "Okta user ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "App user assignment ID"},
-        "profile": {"type": "map", "description": "App user profile"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_user_list": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "users": {"type": "slice", "description": "List of app user assignment objects"},
-        "count": {"type": "int", "description": "Number of assignments returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_user_update": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"},
-        "userId": {"type": "string", "description": "Okta user ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "profile": {"type": "map", "description": "Updated app user profile"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "App user assignment ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_user_unassign": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"},
-        "userId": {"type": "string", "description": "Okta user ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_group_assign": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"},
-        "groupId": {"type": "string", "description": "Okta group ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "profile": {"type": "map", "description": "Group assignment profile"},
-        "priority": {"type": "int", "description": "Assignment priority"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "App group assignment ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_group_get": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"},
-        "groupId": {"type": "string", "description": "Okta group ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "App group assignment ID"},
-        "profile": {"type": "map", "description": "Group assignment profile"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_group_list": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "groups": {"type": "slice", "description": "List of app group assignment objects"},
-        "count": {"type": "int", "description": "Number of assignments returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_group_update": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"},
-        "groupId": {"type": "string", "description": "Okta group ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "profile": {"type": "map", "description": "Updated group assignment profile"},
-        "priority": {"type": "int", "description": "Updated priority"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "App group assignment ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_app_group_unassign": {
-      "required_inputs": {
-        "appId": {"type": "string", "description": "Application ID"},
-        "groupId": {"type": "string", "description": "Okta group ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_server_create": {
-      "required_inputs": {
-        "name": {"type": "string", "description": "Authorization server name"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "description": {"type": "string", "description": "Server description"},
-        "audiences": {"type": "slice", "description": "Token audiences"},
-        "issuerMode": {"type": "string", "description": "Issuer mode (ORG_URL or CUSTOM_URL)"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Authorization server ID"},
-        "name": {"type": "string", "description": "Authorization server name"},
-        "issuer": {"type": "string", "description": "Issuer URL"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_server_get": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Authorization server ID"},
-        "name": {"type": "string", "description": "Authorization server name"},
-        "issuer": {"type": "string", "description": "Issuer URL"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_server_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "servers": {"type": "slice", "description": "List of authorization server objects"},
-        "count": {"type": "int", "description": "Number of servers returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_server_update": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "name": {"type": "string", "description": "Updated server name"},
-        "description": {"type": "string", "description": "Updated description"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Authorization server ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_server_delete": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_server_activate": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_server_deactivate": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_claim_create": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "name": {"type": "string", "description": "Claim name"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "valueType": {"type": "string", "description": "Claim value type (EXPRESSION or GROUPS)"},
-        "value": {"type": "string", "description": "Claim value expression"},
-        "claimType": {"type": "string", "description": "Claim type (RESOURCE or IDENTITY)"},
-        "alwaysIncludeInToken": {"type": "bool", "description": "Always include in token"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Claim ID"},
-        "name": {"type": "string", "description": "Claim name"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_claim_list": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "claims": {"type": "slice", "description": "List of claim objects"},
-        "count": {"type": "int", "description": "Number of claims returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_claim_delete": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "claimId": {"type": "string", "description": "Claim ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_scope_create": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "name": {"type": "string", "description": "Scope name"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "description": {"type": "string", "description": "Scope description"},
-        "consent": {"type": "string", "description": "Consent requirement (REQUIRED, IMPLICIT, or FLEXIBLE)"},
-        "metadataPublish": {"type": "string", "description": "Metadata publish setting"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Scope ID"},
-        "name": {"type": "string", "description": "Scope name"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_scope_list": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "scopes": {"type": "slice", "description": "List of scope objects"},
-        "count": {"type": "int", "description": "Number of scopes returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_scope_delete": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "scopeId": {"type": "string", "description": "Scope ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_policy_create": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "name": {"type": "string", "description": "Policy name"},
-        "type": {"type": "string", "description": "Policy type"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "description": {"type": "string", "description": "Policy description"},
-        "conditions": {"type": "map", "description": "Policy conditions object"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Policy ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_policy_list": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "policies": {"type": "slice", "description": "List of policy objects"},
-        "count": {"type": "int", "description": "Number of policies returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_policy_delete": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "policyId": {"type": "string", "description": "Policy ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_policy_rule_create": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "policyId": {"type": "string", "description": "Policy ID"},
-        "name": {"type": "string", "description": "Rule name"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "type": {"type": "string", "description": "Rule type"},
-        "conditions": {"type": "map", "description": "Rule conditions"},
-        "actions": {"type": "map", "description": "Rule actions"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Rule ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_policy_rule_list": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "policyId": {"type": "string", "description": "Policy ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "rules": {"type": "slice", "description": "List of policy rule objects"},
-        "count": {"type": "int", "description": "Number of rules returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_policy_rule_delete": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"},
-        "policyId": {"type": "string", "description": "Policy ID"},
-        "ruleId": {"type": "string", "description": "Rule ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_key_list": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "keys": {"type": "slice", "description": "List of JSON Web Key objects"},
-        "count": {"type": "int", "description": "Number of keys returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authz_key_rotate": {
-      "required_inputs": {
-        "authorizationServerId": {"type": "string", "description": "Authorization server ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "use": {"type": "string", "description": "Key use (sig)"}
-      },
-      "outputs": {
-        "keys": {"type": "slice", "description": "List of rotated JSON Web Key objects"},
-        "count": {"type": "int", "description": "Number of keys returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_create": {
-      "required_inputs": {
-        "name": {"type": "string", "description": "Policy name"},
-        "type": {"type": "string", "description": "Policy type (e.g. OKTA_SIGN_ON, PASSWORD, MFA_ENROLL)"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "description": {"type": "string", "description": "Policy description"},
-        "conditions": {"type": "map", "description": "Policy conditions object"},
-        "status": {"type": "string", "description": "Policy status (ACTIVE or INACTIVE)"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Policy ID"},
-        "name": {"type": "string", "description": "Policy name"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_get": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Policy ID"},
-        "name": {"type": "string", "description": "Policy name"},
-        "type": {"type": "string", "description": "Policy type"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_list": {
-      "required_inputs": {
-        "type": {"type": "string", "description": "Policy type to list"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "policies": {"type": "slice", "description": "List of policy objects"},
-        "count": {"type": "int", "description": "Number of policies returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_delete": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_activate": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_deactivate": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_rule_create": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"},
-        "name": {"type": "string", "description": "Rule name"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "type": {"type": "string", "description": "Rule type"},
-        "conditions": {"type": "map", "description": "Rule conditions"},
-        "actions": {"type": "map", "description": "Rule actions"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Policy rule ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_rule_list": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "rules": {"type": "slice", "description": "List of policy rule objects"},
-        "count": {"type": "int", "description": "Number of rules returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_rule_delete": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"},
-        "ruleId": {"type": "string", "description": "Rule ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_rule_activate": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"},
-        "ruleId": {"type": "string", "description": "Rule ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_policy_rule_deactivate": {
-      "required_inputs": {
-        "policyId": {"type": "string", "description": "Policy ID"},
-        "ruleId": {"type": "string", "description": "Rule ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authenticator_create": {
-      "required_inputs": {
-        "key": {"type": "string", "description": "Authenticator key (e.g. okta_email, google_otp)"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "name": {"type": "string", "description": "Authenticator display name"},
-        "type": {"type": "string", "description": "Authenticator type"},
-        "settings": {"type": "map", "description": "Authenticator settings"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Authenticator ID"},
-        "key": {"type": "string", "description": "Authenticator key"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authenticator_get": {
-      "required_inputs": {
-        "authenticatorId": {"type": "string", "description": "Authenticator ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Authenticator ID"},
-        "key": {"type": "string", "description": "Authenticator key"},
-        "status": {"type": "string", "description": "Authenticator status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authenticator_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "authenticators": {"type": "slice", "description": "List of authenticator objects"},
-        "count": {"type": "int", "description": "Number of authenticators returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authenticator_activate": {
-      "required_inputs": {
-        "authenticatorId": {"type": "string", "description": "Authenticator ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Authenticator ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_authenticator_deactivate": {
-      "required_inputs": {
-        "authenticatorId": {"type": "string", "description": "Authenticator ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Authenticator ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_factor_enroll": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID"},
-        "factorType": {"type": "string", "description": "Factor type (e.g. token:software:totp, email)"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "provider": {"type": "string", "description": "Factor provider (GOOGLE, OKTA, etc.)"},
-        "profile": {"type": "map", "description": "Factor profile data"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Factor ID"},
-        "factorType": {"type": "string", "description": "Factor type"},
-        "status": {"type": "string", "description": "Factor enrollment status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_factor_list": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "factors": {"type": "slice", "description": "List of enrolled factor objects"},
-        "count": {"type": "int", "description": "Number of factors returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_factor_verify": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID"},
-        "factorId": {"type": "string", "description": "Factor ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "passCode": {"type": "string", "description": "OTP pass code for verification"}
-      },
-      "outputs": {
-        "factorResult": {"type": "string", "description": "Verification result (SUCCESS, CHALLENGE, etc.)"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_factor_unenroll": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID"},
-        "factorId": {"type": "string", "description": "Factor ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_factor_activate": {
-      "required_inputs": {
-        "userId": {"type": "string", "description": "Okta user ID"},
-        "factorId": {"type": "string", "description": "Factor ID"},
-        "passCode": {"type": "string", "description": "Activation pass code"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Factor ID"},
-        "status": {"type": "string", "description": "Factor status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_idp_create": {
-      "required_inputs": {
-        "name": {"type": "string", "description": "Identity provider name"},
-        "type": {"type": "string", "description": "IdP type (e.g. SAML2, OIDC, GOOGLE, FACEBOOK)"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "protocol": {"type": "map", "description": "Protocol configuration"},
-        "policy": {"type": "map", "description": "Policy configuration"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "IdP ID"},
-        "name": {"type": "string", "description": "IdP name"},
-        "type": {"type": "string", "description": "IdP type"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_idp_get": {
-      "required_inputs": {
-        "idpId": {"type": "string", "description": "Identity provider ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "IdP ID"},
-        "name": {"type": "string", "description": "IdP name"},
-        "type": {"type": "string", "description": "IdP type"},
-        "status": {"type": "string", "description": "IdP status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_idp_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "idps": {"type": "slice", "description": "List of identity provider objects"},
-        "count": {"type": "int", "description": "Number of IdPs returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_idp_delete": {
-      "required_inputs": {
-        "idpId": {"type": "string", "description": "Identity provider ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_idp_activate": {
-      "required_inputs": {
-        "idpId": {"type": "string", "description": "Identity provider ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_idp_deactivate": {
-      "required_inputs": {
-        "idpId": {"type": "string", "description": "Identity provider ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_session_get": {
-      "required_inputs": {
-        "sessionId": {"type": "string", "description": "Okta session ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Session ID"},
-        "status": {"type": "string", "description": "Session status"},
-        "userId": {"type": "string", "description": "User ID associated with the session"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_session_refresh": {
-      "required_inputs": {
-        "sessionId": {"type": "string", "description": "Okta session ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Session ID"},
-        "expiresAt": {"type": "string", "description": "Session expiry timestamp"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_session_revoke": {
-      "required_inputs": {
-        "sessionId": {"type": "string", "description": "Okta session ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_network_zone_create": {
-      "required_inputs": {
-        "name": {"type": "string", "description": "Network zone name"},
-        "type": {"type": "string", "description": "Zone type (IP or DYNAMIC)"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "gateways": {"type": "slice", "description": "List of gateway IP ranges"},
-        "proxies": {"type": "slice", "description": "List of proxy IP ranges"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Network zone ID"},
-        "name": {"type": "string", "description": "Network zone name"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_network_zone_get": {
-      "required_inputs": {
-        "zoneId": {"type": "string", "description": "Network zone ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Network zone ID"},
-        "name": {"type": "string", "description": "Network zone name"},
-        "type": {"type": "string", "description": "Network zone type"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_network_zone_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "limit": {"type": "int", "description": "Maximum number of results"}
-      },
-      "outputs": {
-        "zones": {"type": "slice", "description": "List of network zone objects"},
-        "count": {"type": "int", "description": "Number of zones returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_network_zone_delete": {
-      "required_inputs": {
-        "zoneId": {"type": "string", "description": "Network zone ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_network_zone_activate": {
-      "required_inputs": {
-        "zoneId": {"type": "string", "description": "Network zone ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_network_zone_deactivate": {
-      "required_inputs": {
-        "zoneId": {"type": "string", "description": "Network zone ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_log_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "since": {"type": "string", "description": "ISO 8601 timestamp; return logs after this time"},
-        "until": {"type": "string", "description": "ISO 8601 timestamp; return logs before this time"},
-        "filter": {"type": "string", "description": "SCIM filter expression"},
-        "q": {"type": "string", "description": "Keyword search query"},
-        "limit": {"type": "int", "description": "Maximum number of results (max 1000)"}
-      },
-      "outputs": {
-        "logs": {"type": "slice", "description": "List of system log event objects"},
-        "count": {"type": "int", "description": "Number of log events returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_event_hook_create": {
-      "required_inputs": {
-        "name": {"type": "string", "description": "Event hook name"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "events": {"type": "map", "description": "Events subscription object"},
-        "channel": {"type": "map", "description": "Channel configuration object"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Event hook ID"},
-        "name": {"type": "string", "description": "Event hook name"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_event_hook_get": {
-      "required_inputs": {
-        "eventHookId": {"type": "string", "description": "Event hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Event hook ID"},
-        "name": {"type": "string", "description": "Event hook name"},
-        "status": {"type": "string", "description": "Event hook status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_event_hook_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "hooks": {"type": "slice", "description": "List of event hook objects"},
-        "count": {"type": "int", "description": "Number of hooks returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_event_hook_delete": {
-      "required_inputs": {
-        "eventHookId": {"type": "string", "description": "Event hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_event_hook_activate": {
-      "required_inputs": {
-        "eventHookId": {"type": "string", "description": "Event hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_event_hook_deactivate": {
-      "required_inputs": {
-        "eventHookId": {"type": "string", "description": "Event hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_event_hook_verify": {
-      "required_inputs": {
-        "eventHookId": {"type": "string", "description": "Event hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "verificationStatus": {"type": "string", "description": "Verification result"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_inline_hook_create": {
-      "required_inputs": {
-        "name": {"type": "string", "description": "Inline hook name"},
-        "type": {"type": "string", "description": "Inline hook type (e.g. com.okta.oauth2.tokens.transform)"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "version": {"type": "string", "description": "Hook version (e.g. 1.0.0)"},
-        "channel": {"type": "map", "description": "Channel configuration object"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Inline hook ID"},
-        "name": {"type": "string", "description": "Inline hook name"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_inline_hook_get": {
-      "required_inputs": {
-        "inlineHookId": {"type": "string", "description": "Inline hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Inline hook ID"},
-        "name": {"type": "string", "description": "Inline hook name"},
-        "status": {"type": "string", "description": "Inline hook status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_inline_hook_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "hooks": {"type": "slice", "description": "List of inline hook objects"},
-        "count": {"type": "int", "description": "Number of hooks returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_inline_hook_delete": {
-      "required_inputs": {
-        "inlineHookId": {"type": "string", "description": "Inline hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_inline_hook_activate": {
-      "required_inputs": {
-        "inlineHookId": {"type": "string", "description": "Inline hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_inline_hook_deactivate": {
-      "required_inputs": {
-        "inlineHookId": {"type": "string", "description": "Inline hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_inline_hook_execute": {
-      "required_inputs": {
-        "inlineHookId": {"type": "string", "description": "Inline hook ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "payload": {"type": "map", "description": "Payload to send to the inline hook"}
-      },
-      "outputs": {
-        "commands": {"type": "slice", "description": "List of commands returned by the hook"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_domain_create": {
-      "required_inputs": {
-        "domain": {"type": "string", "description": "Custom domain name (e.g. login.example.com)"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "certificateSourceType": {"type": "string", "description": "Certificate source type (MANUAL or OKTA_MANAGED)"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Domain ID"},
-        "domain": {"type": "string", "description": "Domain name"},
-        "validationStatus": {"type": "string", "description": "Validation status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_domain_get": {
-      "required_inputs": {
-        "domainId": {"type": "string", "description": "Domain ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Domain ID"},
-        "domain": {"type": "string", "description": "Domain name"},
-        "validationStatus": {"type": "string", "description": "Validation status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_domain_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "domains": {"type": "slice", "description": "List of domain objects"},
-        "count": {"type": "int", "description": "Number of domains returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_domain_delete": {
-      "required_inputs": {
-        "domainId": {"type": "string", "description": "Domain ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_domain_verify": {
-      "required_inputs": {
-        "domainId": {"type": "string", "description": "Domain ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Domain ID"},
-        "validationStatus": {"type": "string", "description": "Verification status"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_brand_get": {
-      "required_inputs": {
-        "brandId": {"type": "string", "description": "Brand ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Brand ID"},
-        "customPrivacyPolicyUrl": {"type": "string", "description": "Custom privacy policy URL"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_brand_list": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "brands": {"type": "slice", "description": "List of brand objects"},
-        "count": {"type": "int", "description": "Number of brands returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_brand_update": {
-      "required_inputs": {
-        "brandId": {"type": "string", "description": "Brand ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "agreeToCustomPrivacyPolicy": {"type": "bool", "description": "Agree to custom privacy policy"},
-        "customPrivacyPolicyUrl": {"type": "string", "description": "Custom privacy policy URL"},
-        "removePoweredByOkta": {"type": "bool", "description": "Remove Powered by Okta footer"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Brand ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_theme_get": {
-      "required_inputs": {
-        "brandId": {"type": "string", "description": "Brand ID"},
-        "themeId": {"type": "string", "description": "Theme ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Theme ID"},
-        "primaryColorHex": {"type": "string", "description": "Primary color hex value"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_theme_list": {
-      "required_inputs": {
-        "brandId": {"type": "string", "description": "Brand ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "themes": {"type": "slice", "description": "List of theme objects"},
-        "count": {"type": "int", "description": "Number of themes returned"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_theme_update": {
-      "required_inputs": {
-        "brandId": {"type": "string", "description": "Brand ID"},
-        "themeId": {"type": "string", "description": "Theme ID"}
-      },
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "primaryColorHex": {"type": "string", "description": "Primary color hex value"},
-        "secondaryColorHex": {"type": "string", "description": "Secondary color hex value"},
-        "signInPageTouchPointVariant": {"type": "string", "description": "Sign-in page touch point variant"},
-        "errorPageTouchPointVariant": {"type": "string", "description": "Error page touch point variant"},
-        "emailTemplateTouchPointVariant": {"type": "string", "description": "Email template touch point variant"},
-        "endUserDashboardTouchPointVariant": {"type": "string", "description": "End-user dashboard touch point variant"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Theme ID"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_org_get": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Org ID"},
-        "companyName": {"type": "string", "description": "Company name"},
-        "subdomain": {"type": "string", "description": "Okta subdomain"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    },
-    "step.okta_org_update": {
-      "required_inputs": {},
-      "optional_inputs": {
-        "module": {"type": "string", "description": "okta.provider module instance name"},
-        "companyName": {"type": "string", "description": "Updated company name"},
-        "website": {"type": "string", "description": "Updated company website"},
-        "phoneNumber": {"type": "string", "description": "Updated phone number"},
-        "address1": {"type": "string", "description": "Updated street address"},
-        "city": {"type": "string", "description": "Updated city"},
-        "state": {"type": "string", "description": "Updated state"},
-        "country": {"type": "string", "description": "Updated country"}
-      },
-      "outputs": {
-        "id": {"type": "string", "description": "Org ID"},
-        "companyName": {"type": "string", "description": "Updated company name"},
-        "error": {"type": "string", "description": "Error message if the step failed"}
-      }
-    }
-  }
+  ]
 }

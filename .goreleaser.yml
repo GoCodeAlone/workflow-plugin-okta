@@ -22,6 +22,7 @@ archives:
     format: tar.gz
     files:
       - plugin.json
+      - plugin.contracts.json
       - LICENSE
 checksum:
   name_template: checksums.txt

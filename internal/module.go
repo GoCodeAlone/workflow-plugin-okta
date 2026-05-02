@@ -28,6 +28,9 @@ func (m *oktaModule) Init() error {
 	clientID, _ := m.config["clientId"].(string)
 	privateKey, _ := m.config["privateKey"].(string)
 
+	if apiToken != "" && (clientID != "" || privateKey != "") {
+		return fmt.Errorf("okta.provider %q: apiToken cannot be combined with clientId or privateKey", m.name)
+	}
 	if apiToken == "" && (clientID == "" || privateKey == "") {
 		return fmt.Errorf("okta.provider %q: either apiToken or clientId+privateKey are required", m.name)
 	}

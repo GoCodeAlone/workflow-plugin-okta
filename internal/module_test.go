@@ -63,6 +63,22 @@ func TestModuleInit_MissingCredentials(t *testing.T) {
 	}
 }
 
+func TestModuleInit_RejectsMixedCredentialModes(t *testing.T) {
+	m, err := newOktaModule("test-mixed-creds", map[string]any{
+		"orgUrl":     "https://dev-test.okta.com",
+		"apiToken":   "test-token",
+		"clientId":   "0oa123",
+		"privateKey": "-----BEGIN RSA PRIVATE KEY-----\ntest\n-----END RSA PRIVATE KEY-----",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := m.Init(); err == nil {
+		t.Error("expected error for mixed credential modes")
+		UnregisterClient("test-mixed-creds")
+	}
+}
+
 func TestModuleInit_WithClientIdAndPrivateKey(t *testing.T) {
 	m, err := newOktaModule("test-oauth", map[string]any{
 		"orgUrl":     "https://dev-test.okta.com",
