@@ -1,4 +1,4 @@
-.PHONY: build test install cross-build clean
+.PHONY: build test install cross-build clean validate-contracts
 
 BINARY_NAME = workflow-plugin-okta
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo "dev")
@@ -27,6 +27,13 @@ cross-build:
 		CGO_ENABLED=0 GOOS=$${os} GOARCH=$${arch} GOPRIVATE=github.com/GoCodeAlone/* \
 			go build $(LDFLAGS) -o $${output} ./cmd/$(BINARY_NAME); \
 	done
+
+# validate-contracts installs wfctl and validates the plugin manifest.
+# plugin.contracts.json is maintained by hand; to update it, edit the file
+# directly alongside any step implementation changes (see internal/step_*.go).
+validate-contracts:
+	go install github.com/GoCodeAlone/workflow/cmd/wfctl@v0.3.56
+	wfctl plugin validate --file plugin.json
 
 clean:
 	rm -rf bin/

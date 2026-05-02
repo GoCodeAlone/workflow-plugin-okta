@@ -13,21 +13,22 @@
         "optional": {
           "apiToken": {
             "type": "string",
-            "description": "Okta API token for SSWS authentication"
+            "description": "Okta API token for SSWS (token-based) authentication. Required when clientId+privateKey are not provided. Mutually exclusive with clientId+privateKey."
           },
           "clientId": {
             "type": "string",
-            "description": "OAuth 2.0 client ID for private-key authentication"
+            "description": "OAuth 2.0 client ID for private-key (OAuth) authentication. Required together with privateKey when apiToken is not provided."
           },
           "privateKey": {
             "type": "string",
-            "description": "PEM-encoded RSA private key for private-key authentication"
+            "description": "PEM-encoded RSA private key for private-key (OAuth) authentication. Required together with clientId when apiToken is not provided."
           },
           "scopes": {
             "type": "slice",
             "description": "OAuth 2.0 scopes; defaults to okta.users.manage, okta.groups.manage, okta.apps.manage when using private-key auth"
           }
-        }
+        },
+        "constraints": "Credentials are conditionally required: either apiToken OR (clientId AND privateKey) must be provided at runtime."
       }
     }
   },
