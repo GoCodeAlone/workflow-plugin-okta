@@ -2,7 +2,7 @@
 
 BINARY_NAME = workflow-plugin-okta
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo "dev")
-LDFLAGS = -ldflags "-X main.version=$(VERSION)"
+LDFLAGS = -ldflags "-X github.com/GoCodeAlone/workflow-plugin-okta/internal.Version=$(VERSION)"
 INSTALL_DIR ?= data/plugins/$(BINARY_NAME)
 PLATFORMS = linux/amd64 linux/arm64 darwin/amd64 darwin/arm64
 LOCAL_BIN = $(CURDIR)/bin
