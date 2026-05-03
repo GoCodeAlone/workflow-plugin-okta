@@ -14,3 +14,21 @@ jobs:
           go-version-file: go.mod
       - run: go build ./...
       - run: go test ./... -v -race -count=1
+
+  wfctl-strict-contracts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Fail fast if plugin.json is missing
+        run: test -f plugin.json || (echo "plugin.json not found" && exit 1)
+      - name: Fail fast if plugin.contracts.json is missing
+        run: test -f plugin.contracts.json || (echo "plugin.contracts.json not found" && exit 1)
+      - name: Verify strict contract descriptors are generated
+        run: make check-contracts
+      - name: Install wfctl and validate plugin manifest and strict contracts
+        run: make validate-contracts

@@ -1,0 +1,1059 @@
+{
+  "version": "1",
+  "contracts": [
+    {
+      "kind": "module",
+      "type": "okta.provider",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.ProviderConfig"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_reactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_suspend",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_unsuspend",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_unlock",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_reset_factors",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_change_password",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_reset_password",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_expire_password",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_user_set_recovery_question",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_add_user",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_remove_user",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_list_users",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_group_rule_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_assign",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_user_unassign",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_assign",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_app_group_unassign",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_server_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_claim_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_claim_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_claim_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_scope_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_scope_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_scope_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_rule_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_rule_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_policy_rule_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_key_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authz_key_rotate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_policy_rule_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_authenticator_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_enroll",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_verify",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_unenroll",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_factor_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_idp_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_session_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_session_refresh",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_session_revoke",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_network_zone_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_log_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_event_hook_verify",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_activate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_deactivate",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_inline_hook_execute",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_create",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_delete",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_domain_verify",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_brand_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_brand_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_brand_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_theme_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_theme_list",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_theme_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_org_get",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.okta_org_update",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.OktaStepConfig",
+      "input": "workflow.plugins.okta.v1.OktaStepInput",
+      "output": "workflow.plugins.okta.v1.OktaStepOutput"
+    }
+  ]
+}
