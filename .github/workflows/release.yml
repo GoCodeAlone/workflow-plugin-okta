@@ -2,16 +2,16 @@ name: Release
 on:
   push:
     tags: ["v*"]
-permissions:
-  contents: write
 jobs:
   release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-go@v6
+      - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
       - uses: goreleaser/goreleaser-action@v7
@@ -20,49 +20,31 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Sync manifest to registry
-        if: success() && env.GH_TOKEN != ''
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.REGISTRY_PAT }}
-        run: |
-          git clone "https://x-access-token:${GH_TOKEN}@github.com/GoCodeAlone/workflow-registry.git" /tmp/registry
-          mkdir -p /tmp/registry/plugins/okta
-          TAG=${GITHUB_REF#refs/tags/}
-          VERSION=${TAG#v}
-          jq --arg v "$VERSION" '.version = $v' plugin.json > /tmp/registry/plugins/okta/manifest.json
-          cd /tmp/registry
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add plugins/okta/manifest.json
-          git diff --cached --quiet || git commit -m "chore: sync okta plugin manifest v${VERSION}"
-          git push
 
-  notify-registry:
+  publish-release:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: [release]
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Notify workflow-registry
-        if: env.GH_TOKEN != ''
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.REGISTRY_PAT }}
-          repository: GoCodeAlone/workflow-registry
-          event-type: plugin-release
-          client-payload: >-
-            {"plugin": "${{ github.repository }}", "tag": "${{ github.ref_name }}"}
-        env:
-          GH_TOKEN: ${{ secrets.REGISTRY_PAT }}
-        continue-on-error: true
       - name: Publish GitHub release
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.RELEASES_TOKEN || github.token }}
+          github-token: ${{ github.token }}
           script: |
-            const tag = context.ref.replace('refs/tags/', '');
+            const tag = process.env.GITHUB_REF_NAME;
             const { owner, repo } = context.repo;
-            const { data: release } = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
+            let release;
+            try {
+              ({ data: release } = await github.rest.repos.getReleaseByTag({ owner, repo, tag }));
+            } catch (error) {
+              if (error.status === 404) {
+                core.setFailed(`No GitHub release found for ${tag}; ensure GoReleaser created the draft before publishing.`);
+                return;
+              }
+              throw error;
+            }
             if (release.draft) {
               await github.rest.repos.updateRelease({
                 owner,
@@ -71,3 +53,61 @@ jobs:
                 draft: false,
               });
             }
+
+  sync-registry:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [publish-release]
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check registry token
+        id: registry-token
+        env:
+          REGISTRY_PAT: ${{ secrets.REGISTRY_PAT }}
+        run: |
+          if [ -n "$REGISTRY_PAT" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out plugin
+        if: steps.registry-token.outputs.present == 'true'
+        uses: actions/checkout@v4
+        with:
+          path: plugin
+
+      - name: Check out workflow-registry
+        if: steps.registry-token.outputs.present == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: GoCodeAlone/workflow-registry
+          token: ${{ secrets.REGISTRY_PAT }}
+          path: workflow-registry
+
+      - name: Update workflow-registry manifest
+        if: steps.registry-token.outputs.present == 'true'
+        run: |
+          registry_dir="$GITHUB_WORKSPACE/workflow-registry"
+          mkdir -p "$registry_dir/plugins/okta"
+          TAG=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG#v}
+          jq --arg v "$VERSION" --arg tag "$TAG" '
+            .version = $v |
+            .downloads = ((.downloads // []) | map(.url |= sub("/releases/download/v[^/]+/"; "/releases/download/" + $tag + "/")))
+          ' "$GITHUB_WORKSPACE/plugin/plugin.json" > "$registry_dir/plugins/okta/manifest.json"
+          cd "$registry_dir"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add plugins/okta/manifest.json
+          git diff --cached --quiet || git commit -m "chore: sync okta plugin manifest v${VERSION}"
+          git push
+
+      - name: Notify workflow-registry
+        if: steps.registry-token.outputs.present == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.REGISTRY_PAT }}
+          repository: GoCodeAlone/workflow-registry
+          event-type: plugin-release
+          client-payload: >-
+            {"plugin": "${{ github.repository }}", "tag": "${{ github.ref_name }}"}
+        continue-on-error: true
