@@ -1,0 +1,16 @@
+# Minimal config exercising workflow-plugin-okta.
+# Schema-validate with: wfctl validate --skip-unknown-types examples/minimal/config.yaml
+
+version: 1
+
+modules:
+  - name: okta-provider
+    type: okta.provider
+    config: {}
+
+workflows:
+  pipeline:
+    steps:
+      - name: example
+        type: step.okta_user_create
+        config: {}
