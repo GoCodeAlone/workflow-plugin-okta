@@ -8,5 +8,5 @@ import (
 var version = "dev"
 
 func main() {
-	sdk.Serve(internal.NewOktaPlugin())
+	sdk.Serve(internal.NewOktaPlugin(), sdk.WithBuildVersion(sdk.ResolveBuildVersion(internal.Version)))
 }
