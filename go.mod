@@ -3,7 +3,7 @@ module github.com/GoCodeAlone/workflow-plugin-okta
 go 1.26.0
 
 require (
-	github.com/GoCodeAlone/workflow v0.62.0
+	github.com/GoCodeAlone/workflow v0.64.0
 	github.com/okta/okta-sdk-golang/v6 v6.1.5
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 )
