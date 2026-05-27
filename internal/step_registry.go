@@ -2,6 +2,7 @@ package internal
 
 import (
 	"fmt"
+	"sort"
 
 	sdk "github.com/GoCodeAlone/workflow/plugin/external/sdk"
 )
@@ -11,6 +12,11 @@ type stepConstructor func(name string, config map[string]any) (sdk.StepInstance,
 
 // stepRegistry maps step type strings to constructor functions.
 var stepRegistry = map[string]stepConstructor{
+	// Provider descriptors
+	"step.okta_auth_provider_describe": func(n string, c map[string]any) (sdk.StepInstance, error) {
+		return newAuthProviderDescribeStep(n, c), nil
+	},
+
 	// Users — CRUD
 	"step.okta_user_create": func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserCreateStep(n, c) },
 	"step.okta_user_get":    func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserGetStep(n, c) },
@@ -19,19 +25,21 @@ var stepRegistry = map[string]stepConstructor{
 	"step.okta_user_delete": func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserDeleteStep(n, c) },
 
 	// Users — Lifecycle
-	"step.okta_user_activate":     func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserActivateStep(n, c) },
-	"step.okta_user_deactivate":   func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserDeactivateStep(n, c) },
-	"step.okta_user_reactivate":   func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserReactivateStep(n, c) },
-	"step.okta_user_suspend":      func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserSuspendStep(n, c) },
-	"step.okta_user_unsuspend":    func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserUnsuspendStep(n, c) },
-	"step.okta_user_unlock":       func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserUnlockStep(n, c) },
+	"step.okta_user_activate":      func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserActivateStep(n, c) },
+	"step.okta_user_deactivate":    func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserDeactivateStep(n, c) },
+	"step.okta_user_reactivate":    func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserReactivateStep(n, c) },
+	"step.okta_user_suspend":       func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserSuspendStep(n, c) },
+	"step.okta_user_unsuspend":     func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserUnsuspendStep(n, c) },
+	"step.okta_user_unlock":        func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserUnlockStep(n, c) },
 	"step.okta_user_reset_factors": func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserResetFactorsStep(n, c) },
 
 	// Users — Credentials
-	"step.okta_user_change_password":      func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserChangePasswordStep(n, c) },
-	"step.okta_user_reset_password":       func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserResetPasswordStep(n, c) },
-	"step.okta_user_expire_password":      func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserExpirePasswordStep(n, c) },
-	"step.okta_user_set_recovery_question": func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserSetRecoveryQuestionStep(n, c) },
+	"step.okta_user_change_password": func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserChangePasswordStep(n, c) },
+	"step.okta_user_reset_password":  func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserResetPasswordStep(n, c) },
+	"step.okta_user_expire_password": func(n string, c map[string]any) (sdk.StepInstance, error) { return newUserExpirePasswordStep(n, c) },
+	"step.okta_user_set_recovery_question": func(n string, c map[string]any) (sdk.StepInstance, error) {
+		return newUserSetRecoveryQuestionStep(n, c)
+	},
 
 	// Groups — CRUD
 	"step.okta_group_create":      func(n string, c map[string]any) (sdk.StepInstance, error) { return newGroupCreateStep(n, c) },
@@ -116,11 +124,13 @@ var stepRegistry = map[string]stepConstructor{
 	"step.okta_policy_rule_deactivate": func(n string, c map[string]any) (sdk.StepInstance, error) { return newPolicyRuleDeactivateStep(n, c) },
 
 	// Authenticators (MFA)
-	"step.okta_authenticator_create":     func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorCreateStep(n, c) },
-	"step.okta_authenticator_get":        func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorGetStep(n, c) },
-	"step.okta_authenticator_list":       func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorListStep(n, c) },
-	"step.okta_authenticator_activate":   func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorActivateStep(n, c) },
-	"step.okta_authenticator_deactivate": func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorDeactivateStep(n, c) },
+	"step.okta_authenticator_create":   func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorCreateStep(n, c) },
+	"step.okta_authenticator_get":      func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorGetStep(n, c) },
+	"step.okta_authenticator_list":     func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorListStep(n, c) },
+	"step.okta_authenticator_activate": func(n string, c map[string]any) (sdk.StepInstance, error) { return newAuthenticatorActivateStep(n, c) },
+	"step.okta_authenticator_deactivate": func(n string, c map[string]any) (sdk.StepInstance, error) {
+		return newAuthenticatorDeactivateStep(n, c)
+	},
 
 	// User Factors
 	"step.okta_factor_enroll":   func(n string, c map[string]any) (sdk.StepInstance, error) { return newFactorEnrollStep(n, c) },
@@ -206,5 +216,6 @@ func allStepTypes() []string {
 	for k := range stepRegistry {
 		types = append(types, k)
 	}
+	sort.Strings(types)
 	return types
 }

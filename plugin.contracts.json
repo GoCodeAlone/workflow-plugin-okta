@@ -9,6 +9,14 @@
     },
     {
       "kind": "step",
+      "type": "step.okta_auth_provider_describe",
+      "mode": "strict",
+      "config": "workflow.plugins.okta.v1.AuthProviderDescribeConfig",
+      "input": "workflow.plugins.okta.v1.AuthProviderDescribeInput",
+      "output": "workflow.plugins.okta.v1.AuthProviderDescribeOutput"
+    },
+    {
+      "kind": "step",
       "type": "step.okta_user_create",
       "mode": "strict",
       "config": "workflow.plugins.okta.v1.OktaStepConfig",

@@ -23,6 +23,7 @@
             "okta.provider"
         ],
         "stepTypes": [
+            "step.okta_auth_provider_describe",
             "step.okta_user_create",
             "step.okta_user_get",
             "step.okta_user_list",
