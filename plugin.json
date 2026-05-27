@@ -1,6 +1,6 @@
 {
     "name": "workflow-plugin-okta",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Okta identity and access management plugin",
     "author": "GoCodeAlone",
     "license": "MIT",
@@ -162,22 +162,22 @@
         {
             "os": "linux",
             "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.3/workflow-plugin-okta-linux-amd64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.4/workflow-plugin-okta-linux-amd64.tar.gz"
         },
         {
             "os": "linux",
             "arch": "arm64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.3/workflow-plugin-okta-linux-arm64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.4/workflow-plugin-okta-linux-arm64.tar.gz"
         },
         {
             "os": "darwin",
             "arch": "amd64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.3/workflow-plugin-okta-darwin-amd64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.4/workflow-plugin-okta-darwin-amd64.tar.gz"
         },
         {
             "os": "darwin",
             "arch": "arm64",
-            "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.3/workflow-plugin-okta-darwin-arm64.tar.gz"
+            "url": "https://github.com/GoCodeAlone/workflow-plugin-okta/releases/download/v0.2.4/workflow-plugin-okta-darwin-arm64.tar.gz"
         }
     ]
 }
