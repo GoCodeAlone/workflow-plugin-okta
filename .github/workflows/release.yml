@@ -79,10 +79,19 @@ jobs:
               ({ data: release } = await github.rest.repos.getReleaseByTag({ owner, repo, tag }));
             } catch (error) {
               if (error.status === 404) {
-                core.setFailed(`No GitHub release found for ${tag}; ensure GoReleaser created the draft before publishing.`);
-                return;
+                const releases = await github.paginate(github.rest.repos.listReleases, {
+                  owner,
+                  repo,
+                  per_page: 100,
+                });
+                release = releases.find((candidate) => candidate.tag_name === tag);
+                if (!release) {
+                  core.setFailed(`No GitHub release found for ${tag}; ensure GoReleaser created the draft before publishing.`);
+                  return;
+                }
+              } else {
+                throw error;
               }
-              throw error;
             }
             if (release.draft) {
               await github.rest.repos.updateRelease({
