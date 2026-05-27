@@ -29,6 +29,10 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goreleaser-dist
+          path: dist/
 
   publish-release:
     if: startsWith(github.ref, 'refs/tags/v')
@@ -37,6 +41,18 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: Install wfctl v0.63.2
+        run: |
+          mkdir -p "${RUNNER_TEMP}/wfctl-bin"
+          curl -sSfL -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -o "${RUNNER_TEMP}/wfctl-bin/wfctl" \
+            "https://github.com/GoCodeAlone/workflow/releases/download/v0.63.2/wfctl-linux-amd64"
+          chmod +x "${RUNNER_TEMP}/wfctl-bin/wfctl"
+      - uses: actions/download-artifact@v4
+        with:
+          name: goreleaser-dist
+          path: dist/
       # workflow#765: runtime truth-check via plugin verify-capabilities.
       - name: Verify capabilities (runtime truth-check)
         run: |
