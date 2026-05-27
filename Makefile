@@ -39,7 +39,7 @@ $(WFCTL):
 # plugin.contracts.json is generated from plugin.json capabilities so strict
 # contract coverage stays in sync with the advertised module and step types.
 generate-contracts:
-	jq '{version:"1",contracts:(([.capabilities.moduleTypes[]|{kind:"module",type:.,mode:"strict",config:"workflow.plugins.okta.v1.ProviderConfig"}]+[.capabilities.stepTypes[]|{kind:"step",type:.,mode:"strict",config:"workflow.plugins.okta.v1.OktaStepConfig",input:"workflow.plugins.okta.v1.OktaStepInput",output:"workflow.plugins.okta.v1.OktaStepOutput"}]))}' plugin.json > plugin.contracts.json
+	jq '{version:"1",contracts:(([.capabilities.moduleTypes[]|{kind:"module",type:.,mode:"strict",config:"workflow.plugins.okta.v1.ProviderConfig"}]+[.capabilities.stepTypes[]|if . == "step.okta_auth_provider_describe" then {kind:"step",type:.,mode:"strict",config:"workflow.plugins.okta.v1.AuthProviderDescribeConfig",input:"workflow.plugins.okta.v1.AuthProviderDescribeInput",output:"workflow.plugins.okta.v1.AuthProviderDescribeOutput"} else {kind:"step",type:.,mode:"strict",config:"workflow.plugins.okta.v1.OktaStepConfig",input:"workflow.plugins.okta.v1.OktaStepInput",output:"workflow.plugins.okta.v1.OktaStepOutput"} end]))}' plugin.json > plugin.contracts.json
 
 check-contracts: generate-contracts
 	git diff --exit-code -- plugin.contracts.json
