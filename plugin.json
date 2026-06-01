@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-okta",
-  "version": "0.2.6",
+  "version": "0.0.0",
   "description": "Okta identity and access management plugin",
   "author": "GoCodeAlone",
   "license": "MIT",
